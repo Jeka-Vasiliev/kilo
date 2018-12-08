@@ -7,27 +7,23 @@
 #include <termios.h>
 #include <unistd.h>
 
-
 /*** data ***/
 
 struct termios orig_termios;
 
 /*** terminal ***/
 
-void die(const char *s)
-{
+void die(const char *s) {
     perror(s);
     exit(1);
 }
 
-void disableRawMode()
-{
+void disableRawMode() {
     if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1)
         die("tcsetattr");
 }
 
-void enableRawMode()
-{
+void enableRawMode() {
     if (tcgetattr(STDIN_FILENO, &orig_termios) == -1) die("tcgetattr");
     atexit(disableRawMode);
 
@@ -44,23 +40,17 @@ void enableRawMode()
 
 /*** init ***/
 
-int main()
-{
+int main() {
     enableRawMode();
-    while (1)
-    {
+    while (1) {
         char c = '\0';
         if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN) die("read");
-        if (iscntrl(c))
-        {
+        if (iscntrl(c)) {
             printf("%d\n\r", c);
-        }
-        else
-        {
+        } else {
             printf("%d (%c)\n\r", c, c);
         }
-        if (c == 'q')
-            break;
+        if (c == 'q') break;
     }
     return 0;
 }
