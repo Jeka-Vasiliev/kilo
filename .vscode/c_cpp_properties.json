@@ -1,0 +1,24 @@
+{
+    "env" : {
+        "myDefaultIncludePath": [
+            "${workspaceFolder}",
+            "${workspaceFolder}/include"
+        ],
+        "myCompilerPath": "/usr/local/bin/gcc-7"
+    },
+    "configurations": [
+        {
+            "name": "Bash",
+            "intelliSenseMode": "gcc-x64",
+            "includePath": [ "${myDefaultIncludePath}" ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c99",
+            "browse": {
+                "path": [ "${workspaceFolder}" ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}
